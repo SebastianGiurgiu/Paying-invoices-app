@@ -17,7 +17,6 @@
 		ED47EDAB1ECF4D0E00F5FC0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED47EDA91ECF4D0E00F5FC0E /* LaunchScreen.storyboard */; };
 		ED47EDB31ECF4DD400F5FC0E /* VideoListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47EDB21ECF4DD400F5FC0E /* VideoListScreen.swift */; };
 		ED47EDB51ECF51B000F5FC0E /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47EDB41ECF51B000F5FC0E /* VideoCell.swift */; };
-		ED47EDB71ECF530000F5FC0E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47EDB61ECF530000F5FC0E /* Video.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		ED47EDAC1ECF4D0E00F5FC0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED47EDB21ECF4DD400F5FC0E /* VideoListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListScreen.swift; sourceTree = "<group>"; };
 		ED47EDB41ECF51B000F5FC0E /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
-		ED47EDB61ECF530000F5FC0E /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +67,6 @@
 				ED47EDA01ECF4D0E00F5FC0E /* AppDelegate.swift */,
 				ED47EDB21ECF4DD400F5FC0E /* VideoListScreen.swift */,
 				ED47EDB41ECF51B000F5FC0E /* VideoCell.swift */,
-				ED47EDB61ECF530000F5FC0E /* Video.swift */,
 				ED47EDA41ECF4D0E00F5FC0E /* Main.storyboard */,
 				ED47EDA71ECF4D0E00F5FC0E /* Assets.xcassets */,
 				ED47EDA91ECF4D0E00F5FC0E /* LaunchScreen.storyboard */,
@@ -157,7 +154,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED47EDA11ECF4D0E00F5FC0E /* AppDelegate.swift in Sources */,
-				ED47EDB71ECF530000F5FC0E /* Video.swift in Sources */,
 				ED47EDB31ECF4DD400F5FC0E /* VideoListScreen.swift in Sources */,
 				CB7B5CA624350DAD00B027CF /* Invoice.swift in Sources */,
 				CB7B5CA224350C6300B027CF /* Company.swift in Sources */,

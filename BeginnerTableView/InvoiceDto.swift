@@ -54,12 +54,12 @@ func createInvoiceDtoArray(invoices: [Invoice] ) -> [InvoiceDto] {
     }
     
     
-    var counts: [InvoiceDto: Int] = [:]
-    for item in invoicesDto {
-        counts[item] = (counts[item] ?? 0) + 1
-    }
-    
-    
+//    var counts: [InvoiceDto: Int] = [:]
+//    for item in invoicesDto {
+//        counts[item] = (counts[item] ?? 0) + 1
+//    }
+//    
+//    
 //    for index in 1..<invoicesDto.count{
 //        if counts[invoicesDto[index]]! > 1 {
 //            invoicesDto[index].duplicationFlag = true
