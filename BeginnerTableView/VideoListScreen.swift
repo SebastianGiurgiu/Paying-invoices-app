@@ -17,6 +17,16 @@ class VideoListScreen: UIViewController {
     var invoices: [Invoice] = []
     var invoicesDto: [InvoiceDto] = []
     
+    
+    func sorterAfterDueDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
+        return this.dates[0] < that.dates[0]
+    }
+    
+    func sorterAfterPaidDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
+        return this.dates[1] < that.dates[1]
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let strings = createtringNames()
@@ -24,9 +34,33 @@ class VideoListScreen: UIViewController {
         products = createProductsArray()
         invoices = createInvoiceArray(companies: companies, products: products)
         invoicesDto = createInvoiceDtoArray(invoices: invoices)
+        
+        var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
+        unpaidInvoicesDto.sort(by: sorterAfterDueDate)
+        print(unpaidInvoicesDto.count)
+        
+        var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
+        paidInvoicesDto.sort(by: sorterAfterPaidDate)
+        print(paidInvoicesDto.count)
+        
+        invoicesDto = []
+        invoicesDto += unpaidInvoicesDto
+        invoicesDto += paidInvoicesDto
+        
+    
+        for index in 0..<invoicesDto.count{
+            let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
+            if nrOfElements > 1 {
+                print(invoicesDto[index])
+                invoicesDto[index].duplicationFlag = true
+            }
+        }
+          
+        
+        
        // print(companies)
       //  print(products)
-        print(invoicesDto)
+      //  print(invoicesDto)
     }
   
     

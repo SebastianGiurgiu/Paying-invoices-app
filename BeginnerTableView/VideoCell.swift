@@ -19,9 +19,8 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak var dueDate: UILabel!
     @IBOutlet weak var paidDate: UILabel!
     @IBOutlet weak var duplicat: UILabel!
+
     
-//    func setVideo(video: Video) {
-//    }
     func setInvoiceDto(invoiceDto: InvoiceDto) {
         sellerName.text = invoiceDto.seller
         
@@ -36,12 +35,23 @@ class VideoCell: UITableViewCell {
             paidDate.text = paidDateString
         }
         
-        prod1Name.text = invoiceDto.products[0]
-        if(invoiceDto.products.count == 2 ){
-            prod2Name.text = invoiceDto.products[1]
+        if(invoiceDto.products.count == 1 ){
+           prod1Name.text = invoiceDto.products[0]
+           prod2Name.text = "p2"
+           prod3Name.text = "p3"
         }
         
+        
+        if(invoiceDto.products.count == 2 ){
+            prod1Name.text = invoiceDto.products[0]
+            prod2Name.text = invoiceDto.products[1]
+            prod3Name.text = "p3"
+        }
+        
+        
         if(invoiceDto.products.count == 3 ){
+            prod1Name.text = invoiceDto.products[0]
+            prod2Name.text = invoiceDto.products[1]
             prod3Name.text = invoiceDto.products[2]
         }
         
@@ -52,8 +62,6 @@ class VideoCell: UITableViewCell {
         } else {
              duplicat.text = ""
         }
-        
-        
         
        }
     

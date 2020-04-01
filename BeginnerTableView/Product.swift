@@ -16,9 +16,8 @@ struct Product: Equatable {
 }
 
 func ==(lhs: Product, rhs: Product) -> Bool {
-    return lhs.name == rhs.name || lhs.productNumber == rhs.productNumber
+    return lhs.name == rhs.name
 }
-
 
 
 func generateProductName() -> String {

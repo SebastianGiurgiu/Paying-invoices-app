@@ -10,7 +10,7 @@
 import UIKit
 
 
-struct Invoice: Equatable {
+struct Invoice{
     var invoiceNumber: Int
     var seller: String
     var products: [Product]
@@ -18,18 +18,6 @@ struct Invoice: Equatable {
     var dueDate: Date
     var payDate: Date?
 }
-
-func ==(lhs: Invoice, rhs: Invoice) -> Bool {
-    
-    if lhs.products == rhs.products {
-        print("Aceleasi produse")
-    }
-    
-    return lhs.products == rhs.products
-}
-
-
-
 
 
 
@@ -65,7 +53,7 @@ func generateNewInvoice(company: Company, products: [Product]) -> Invoice{
     let existPayDate = Int.random(in: 0...1)
     if existPayDate == 1 {
         let nrDaysForPayDate = Int.random(in: 0...5)
-        let payDate = Calendar.current.date(byAdding: .day, value: nrDaysForPayDate, to: today)!
+        let payDate = Calendar.current.date(byAdding: .day, value: -nrDaysForPayDate, to: today)!
         invoice.payDate = payDate
     }
     
@@ -90,15 +78,15 @@ func createInvoiceArray(companies: [Company], products: [Product]) -> [Invoice] 
         invoices.append(invoice)
     }
     
-    let nrOfOther = 50 - companies.count
-    
-    for _ in 1...nrOfOther {
-        let x = Int.random(in: 0..<companies.count)
-        var invoice = generateNewInvoice(company: companies[x], products: products)
-        invoice.invoiceNumber = uniqueId
-        uniqueId += 1
-        invoices.append(invoice)
-    }
+//    let nrOfOther = 50 - companies.count
+//    
+//    for _ in 1...nrOfOther {
+//        let x = Int.random(in: 0..<companies.count)
+//        var invoice = generateNewInvoice(company: companies[x], products: products)
+//        invoice.invoiceNumber = uniqueId
+//        uniqueId += 1
+//        invoices.append(invoice)
+//    }
     
    var nrOfUnpaidInvoices = 0
     for invoice in invoices {

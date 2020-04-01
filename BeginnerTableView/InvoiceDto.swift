@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InvoiceDto: Hashable {
+struct InvoiceDto: Equatable {
     var invoiceNumber: Int
     var seller: String
     var dates: [Date]
@@ -18,10 +18,21 @@ struct InvoiceDto: Hashable {
 }
 
 func ==(lhs: InvoiceDto, rhs: InvoiceDto) -> Bool {
-    if lhs.products == rhs.products {
-        print("Aceleasi produse")
+    
+    
+    for prod in lhs.products {
+        if !rhs.products.contains(prod){
+            return false
+        }
     }
-    return lhs.products == rhs.products
+    
+    for prod in rhs.products {
+        if !lhs.products.contains(prod) {
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 
@@ -52,22 +63,7 @@ func createInvoiceDtoArray(invoices: [Invoice] ) -> [InvoiceDto] {
         
         
     }
-    
-    
-//    var counts: [InvoiceDto: Int] = [:]
-//    for item in invoicesDto {
-//        counts[item] = (counts[item] ?? 0) + 1
-//    }
-//    
-//    
-//    for index in 1..<invoicesDto.count{
-//        if counts[invoicesDto[index]]! > 1 {
-//            invoicesDto[index].duplicationFlag = true
-//        }
-//    }
       
- // print(counts)
-  print("___________________")
     
   return invoicesDto
 }
