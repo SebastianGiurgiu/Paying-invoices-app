@@ -61,42 +61,49 @@ class VideoListScreen: UIViewController {
                 invoicesDto[index].duplicationFlag = true
             }
         }
-          
+        searchInvoices = invoicesDto
         
-        
-       // print(companies)
-      //  print(products)
-      //  print(invoicesDto)
     }
-  
-    
 }
 
 
 extension VideoListScreen: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if searching {
-            return searchInvoices.count
-        }
-        
-        return invoicesDto.count
+        return searchInvoices.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! VideoCell
-        var invoiceDto: InvoiceDto
+        let invoiceDto = searchInvoices[indexPath.row]
         if searching {
-            invoiceDto = searchInvoices[indexPath.row]
             cell.setInvoiceDto2(invoiceDto: invoiceDto, searchText: text)
         } else {
-            invoiceDto = invoicesDto[indexPath.row]
             cell.setInvoiceDto(invoiceDto: invoiceDto)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let paid = paidAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [paid])
+    }
+    
+    func paidAction(at indexPath: IndexPath) -> UIContextualAction {
+        
+        let invoiceDto = searchInvoices[indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "PAID") {
+            (action, view, completion ) in
+                print(invoiceDto)
+            self.searchInvoices[indexPath.row].dates.append(Date())
+            self.tableView.reloadData()
+        }
+        
+        action.backgroundColor = .red
+        return action
+        
     }
 }
 
@@ -117,6 +124,7 @@ extension VideoListScreen: UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         searchBar.showsCancelButton = false
+        searchInvoices = invoicesDto
         tableView.reloadData()
     }
     
@@ -176,16 +184,13 @@ func getOrderedInvoicesDtoAfterText(invoicesDto: [InvoiceDto],searchText: String
     }
         filteredInvoicesDto.append(contentsOf: invoicesAnyMatchProduct)
         nr = filteredInvoicesDto.count
-        
     }
 
-    
     while nr > 10 {
         filteredInvoicesDto.removeLast()
         nr -= 1
     }
       
-    
   return filteredInvoicesDto
 }
 
