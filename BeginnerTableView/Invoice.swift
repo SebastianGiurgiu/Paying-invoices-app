@@ -78,15 +78,15 @@ func createInvoiceArray(companies: [Company], products: [Product]) -> [Invoice] 
         invoices.append(invoice)
     }
     
-//    let nrOfOther = 50 - companies.count
-//    
-//    for _ in 1...nrOfOther {
-//        let x = Int.random(in: 0..<companies.count)
-//        var invoice = generateNewInvoice(company: companies[x], products: products)
-//        invoice.invoiceNumber = uniqueId
-//        uniqueId += 1
-//        invoices.append(invoice)
-//    }
+    let nrOfOther = 50 - companies.count
+    
+    for _ in 1...nrOfOther {
+        let x = Int.random(in: 0..<companies.count)
+        var invoice = generateNewInvoice(company: companies[x], products: products)
+        invoice.invoiceNumber = uniqueId
+        uniqueId += 1
+        invoices.append(invoice)
+    }
     
    var nrOfUnpaidInvoices = 0
     for invoice in invoices {

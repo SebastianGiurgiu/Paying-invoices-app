@@ -19,8 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="XE6-Ej-cBf">
+                                <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="398" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tK3-y4-snP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="132" width="375" height="680"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoCell" rowHeight="398" id="JJs-mj-aVP" customClass="VideoCell" customModule="BeginnerTableView" customModuleProvider="target">
@@ -152,12 +156,17 @@
                         <constraints>
                             <constraint firstItem="tK3-y4-snP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EIY-kQ-8LV"/>
                             <constraint firstAttribute="bottom" secondItem="tK3-y4-snP" secondAttribute="bottom" id="JdJ-Le-vEY"/>
-                            <constraint firstItem="tK3-y4-snP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XnO-ld-Pg1"/>
+                            <constraint firstItem="tK3-y4-snP" firstAttribute="top" secondItem="XE6-Ej-cBf" secondAttribute="bottom" id="MRS-bv-FUJ"/>
+                            <constraint firstItem="XE6-Ej-cBf" firstAttribute="trailing" secondItem="tK3-y4-snP" secondAttribute="trailing" id="UD4-hq-TmY"/>
+                            <constraint firstItem="XE6-Ej-cBf" firstAttribute="leading" secondItem="tK3-y4-snP" secondAttribute="leading" id="UV6-Ml-p1n"/>
+                            <constraint firstItem="tK3-y4-snP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="132" id="XnO-ld-Pg1"/>
                             <constraint firstAttribute="trailing" secondItem="tK3-y4-snP" secondAttribute="trailing" id="oo8-EJ-SMb"/>
+                            <constraint firstItem="XE6-Ej-cBf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="yRM-fW-OhG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Invoices" id="3S2-qC-8Xh"/>
                     <connections>
+                        <outlet property="searchBar" destination="XE6-Ej-cBf" id="1bJ-P5-KpF"/>
                         <outlet property="tableView" destination="tK3-y4-snP" id="xG8-c2-oXR"/>
                     </connections>
                 </viewController>
