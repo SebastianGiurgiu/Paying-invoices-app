@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SQLite3
+import CoreData
 
 class VideoListScreen: UIViewController {
     
@@ -20,6 +22,11 @@ class VideoListScreen: UIViewController {
     var searchInvoices: [InvoiceDto] = []
     var searching = false
     var text = ""
+    var database: Database = Database()
+
+    
+    var companiesCoreData : [NSManagedObject] = []
+    
     
     func sorterAfterDueDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
         return this.dates[0] < that.dates[0]
@@ -41,13 +48,28 @@ class VideoListScreen: UIViewController {
         invoices = createInvoiceArray(companies: companies, products: products)
         invoicesDto = createInvoiceDtoArray(invoices: invoices)
         
+        let managedContext = database.managedContext
+        
+       // database.addAllCompaniesInCoreData(companies: companies)
+       // database.deleteAllData(entity: "CompanyCoreData")
+        
+        
+      //  database.addAllProductInCoreData(products: products)
+      
+        
+       // database.showAllProduct()
+        
+       // database.addAllInvoiceInCoreData(invoices: invoices)
+        
+         database.showInvoicesProduct()
+        
         var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
         unpaidInvoicesDto.sort(by: sorterAfterDueDate)
-        print(unpaidInvoicesDto.count)
+        // print(unpaidInvoicesDto.count)
         
         var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
         paidInvoicesDto.sort(by: sorterAfterPaidDate)
-        print(paidInvoicesDto.count)
+        // print(paidInvoicesDto.count)
         
         invoicesDto = []
         invoicesDto += unpaidInvoicesDto
@@ -57,7 +79,7 @@ class VideoListScreen: UIViewController {
         for index in 0..<invoicesDto.count{
             let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
             if nrOfElements > 1 {
-                print(invoicesDto[index])
+                // print(invoicesDto[index])
                 invoicesDto[index].duplicationFlag = true
             }
         }
@@ -193,6 +215,4 @@ func getOrderedInvoicesDtoAfterText(invoicesDto: [InvoiceDto],searchText: String
       
   return filteredInvoicesDto
 }
-
-
 

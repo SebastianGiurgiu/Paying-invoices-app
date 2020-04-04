@@ -14,7 +14,7 @@ struct Company: Equatable {
 }
 
 
- func ==(lhs: Company, rhs: Company) -> Bool {
+func ==(lhs: Company, rhs: Company) -> Bool {
     return lhs.name == rhs.name
    }
 
@@ -28,7 +28,7 @@ func createtringNames() -> [String] {
 
 
 
-  func generateNewCompany(numberOfWords: Int, availableStrings: [String]) -> Company {
+func generateNewCompany(numberOfWords: Int, availableStrings: [String]) -> Company {
       
       var c = Company(name: "", phoneNumber: "")
       
