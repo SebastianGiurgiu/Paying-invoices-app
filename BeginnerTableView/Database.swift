@@ -68,6 +68,35 @@ class Database {
     }
     
     
+    
+    func paidInvoiceCoreData(invoiceNumber: Int) {
+        
+        var invoicesCoreData : [NSManagedObject] = []
+        
+        let fetchRequest =
+          NSFetchRequest<NSManagedObject>(entityName: "InvoiceCoreData")
+        
+        do {
+            invoicesCoreData = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+          print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        for result in invoicesCoreData {
+            let iN = result.value(forKey: "invoiceNumber") as? Int16
+                if Int(iN!) == invoiceNumber {
+                    result.setValue(Date(), forKey: "payDate")
+            }
+        }
+        
+        do {
+            try self.managedContext.save()
+            } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            }
+    }
+    
+    
     func addAllInvoiceInCoreData(invoices: [Invoice]) {
            
            let invoiceEntity =

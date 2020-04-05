@@ -100,4 +100,19 @@ func createInvoiceArray(companies: [Company], products: [Product]) -> [Invoice] 
   return invoices
 }
 
+func paidInvoice(invoices: inout [Invoice], invoiceNumber: Int) {
+    
+    for index in 0..<invoices.count{
+        if invoices[index].invoiceNumber == invoiceNumber {
+            invoices[index].payDate = Date()
+        }
+    }
+    
+}
+
+
+
+
+
+
 

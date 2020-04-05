@@ -55,20 +55,7 @@ class VideoListScreen: UIViewController {
         
         let managedContext = database.managedContext
         
-       // database.addAllCompaniesInCoreData(companies: companies)
-       // database.deleteAllData(entity: "CompanyCoreData")
-        
-        
-      //  database.addAllProductInCoreData(products: products)
       
-        
-       // database.showAllProduct()
-        
-      //  database.addAllInvoiceInCoreData(invoices: invoices)
-        
-     //   database.showAllInvoices()
-     //   database.showAllInvoicesProductBinds()
-        
 //        database.deleteAllData(entity: "CompanyCoreData")
 //        database.deleteAllData(entity: "ProductCoreData")
 //        database.deleteAllData(entity: "InvoiceCoreData")
@@ -136,6 +123,8 @@ extension VideoListScreen: UITableViewDataSource, UITableViewDelegate {
             (action, view, completion ) in
                 print(invoiceDto)
             self.searchInvoices[indexPath.row].dates.append(Date())
+            paidInvoice(invoices: &self.invoices, invoiceNumber: self.searchInvoices[indexPath.row].invoiceNumber)
+            self.database.paidInvoiceCoreData(invoiceNumber: self.searchInvoices[indexPath.row].invoiceNumber)
             self.tableView.reloadData()
         }
         
