@@ -43,9 +43,14 @@ class VideoListScreen: UIViewController {
         searchBar.delegate = self
         
         let strings = createtringNames()
-        companies = createCompaniesArray(availableStrings: strings)
-        products = createProductsArray()
-        invoices = createInvoiceArray(companies: companies, products: products)
+//        companies = createCompaniesArray(availableStrings: strings)
+//        products = createProductsArray()
+//        invoices = createInvoiceArray(companies: companies, products: products)
+//        
+        companies = database.getCompaniesFromCoreData()
+        products = database.getProductsFromCoreData()
+        invoices = database.getInvoiceFromCoreData()
+
         invoicesDto = createInvoiceDtoArray(invoices: invoices)
         
         let managedContext = database.managedContext
@@ -59,9 +64,20 @@ class VideoListScreen: UIViewController {
         
        // database.showAllProduct()
         
-       // database.addAllInvoiceInCoreData(invoices: invoices)
+      //  database.addAllInvoiceInCoreData(invoices: invoices)
         
-         database.showInvoicesProduct()
+     //   database.showAllInvoices()
+     //   database.showAllInvoicesProductBinds()
+        
+//        database.deleteAllData(entity: "CompanyCoreData")
+//        database.deleteAllData(entity: "ProductCoreData")
+//        database.deleteAllData(entity: "InvoiceCoreData")
+//        database.deleteAllData(entity: "InvoiceProductCoreData")
+
+//        database.addAllCompaniesInCoreData(companies: companies)
+//        database.addAllProductInCoreData(products: products)
+//        database.addAllInvoiceInCoreData(invoices: invoices)
+
         
         var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
         unpaidInvoicesDto.sort(by: sorterAfterDueDate)
