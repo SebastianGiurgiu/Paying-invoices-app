@@ -40,17 +40,17 @@ func generateNewProduct() -> Product {
     return p
 }
 
-func createProductsArray() -> [Product] {
+func createProductsArray(nrOfProducts: Int) -> [Product] {
     
   var products: [Product] = []
    
-    var nrOfProducts = 1
-    while nrOfProducts <= 21 {
+    var nrOfP = 1
+    while nrOfP <= nrOfProducts {
         var p = generateNewProduct()
             if !products.contains(p) {
-                p.productNumber = nrOfProducts
+                p.productNumber = nrOfP
                 products.append(p)
-                nrOfProducts += 1
+                nrOfP += 1
             }
         }
     

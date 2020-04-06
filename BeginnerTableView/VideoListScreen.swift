@@ -30,10 +30,6 @@ class VideoListScreen: UIViewController {
     var createNewData: Bool = false
     
     
-    
-    var companiesCoreData : [NSManagedObject] = []
-    
-    
     func sorterAfterDueDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
         return this.dates[0] < that.dates[0]
     }
@@ -54,33 +50,12 @@ class VideoListScreen: UIViewController {
             print(nrOfCompanies)
             print(nrOfProducts)
             print(nrOfInvoices)
-            print(createNewData)
+            self.createNewDataAndSaveInCoreData(nrOfCompanies: nrOfCompanies,nrOfProducts: nrOfProducts,nrOfInvoices: nrOfInvoices)
+        } else {
+            self.continueWithOldDataFromCoreData()
         }
         
-        
-        let strings = createtringNames()
-//        companies = createCompaniesArray(availableStrings: strings)
-//        products = createProductsArray()
-//        invoices = createInvoiceArray(companies: companies, products: products)
-//        
-        companies = database.getCompaniesFromCoreData()
-        products = database.getProductsFromCoreData()
-        invoices = database.getInvoiceFromCoreData()
-
         invoicesDto = createInvoiceDtoArray(invoices: invoices)
-        
-        let managedContext = database.managedContext
-        
-      
-//        database.deleteAllData(entity: "CompanyCoreData")
-//        database.deleteAllData(entity: "ProductCoreData")
-//        database.deleteAllData(entity: "InvoiceCoreData")
-//        database.deleteAllData(entity: "InvoiceProductCoreData")
-
-//        database.addAllCompaniesInCoreData(companies: companies)
-//        database.addAllProductInCoreData(products: products)
-//        database.addAllInvoiceInCoreData(invoices: invoices)
-
         
         var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
         unpaidInvoicesDto.sort(by: sorterAfterDueDate)
@@ -102,6 +77,41 @@ class VideoListScreen: UIViewController {
         }
         searchInvoices = invoicesDto
     }
+    
+    func createNewDataAndSaveInCoreData(nrOfCompanies: Int,nrOfProducts: Int,nrOfInvoices: Int) {
+        
+        
+        if nrOfCompanies > nrOfInvoices {
+            self.continueWithOldDataFromCoreData()
+            return;
+        }
+        
+        database.deleteAllData(entity: "CompanyCoreData")
+        database.deleteAllData(entity: "ProductCoreData")
+        database.deleteAllData(entity: "InvoiceCoreData")
+        database.deleteAllData(entity: "InvoiceProductCoreData")
+        
+        let strings = createtringNames()
+        companies = createCompaniesArray(availableStrings: strings, nrOfCompanies: nrOfCompanies)
+        products = createProductsArray(nrOfProducts: nrOfProducts)
+        invoices = createInvoiceArray(companies: companies, products: products, nrOfInvoices: nrOfInvoices)
+        
+        database.addAllCompaniesInCoreData(companies: companies)
+        database.addAllProductInCoreData(products: products)
+        database.addAllInvoiceInCoreData(invoices: invoices)
+        
+    }
+
+    func continueWithOldDataFromCoreData() {
+        
+        companies = database.getCompaniesFromCoreData()
+        products = database.getProductsFromCoreData()
+        invoices = database.getInvoiceFromCoreData()
+        
+    }
+    
+    
+    
 }
 
 

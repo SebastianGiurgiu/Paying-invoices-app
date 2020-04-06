@@ -64,7 +64,7 @@ func generatePhoneNumber() -> String {
 }
   
 
-func createCompaniesArray( availableStrings: [String]) -> [Company] {
+func createCompaniesArray( availableStrings: [String], nrOfCompanies : Int) -> [Company] {
     
   var companies: [Company] = []
    
@@ -78,7 +78,7 @@ func createCompaniesArray( availableStrings: [String]) -> [Company] {
     }
     
     var nrOfOtherCompanies = 1
-    while nrOfOtherCompanies <= 21 {
+    while nrOfOtherCompanies <= nrOfCompanies {
         let numberOfWords = Int.random(in: 2..<4)
         let c = generateNewCompany(numberOfWords: numberOfWords, availableStrings: availableStrings)
         if !companies.contains(c) {
