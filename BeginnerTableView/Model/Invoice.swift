@@ -77,7 +77,7 @@ func createInvoiceArray(companies: [Company], products: [Product], nrOfInvoices:
     
     let nrOfOther = nrOfInvoices - companies.count
     
-    for _ in 1...nrOfOther {
+    for _ in 0...nrOfOther {
         let x = Int.random(in: 0..<companies.count)
         var invoice = generateNewInvoice(company: companies[x], products: products)
         invoice.invoiceNumber = uniqueId

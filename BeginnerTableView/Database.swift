@@ -147,18 +147,18 @@ class Database {
                     NSEntityDescription.entity(forEntityName: "InvoiceProductCoreData",
                                                in: self.managedContext)!
                
-        let invoice = invoices[invoices.count - 1]
+               let invoice = invoices[invoices.count - 1]
             
-                  let invoiceDataCoreForInsert = NSManagedObject(entity: invoiceEntity,
+                let invoiceDataCoreForInsert = NSManagedObject(entity: invoiceEntity,
                                                                  insertInto: self.managedContext)
                
-                   invoiceDataCoreForInsert.setValue(invoice.invoiceNumber, forKey: "invoiceNumber")
-                   invoiceDataCoreForInsert.setValue(invoice.seller, forKey: "seller")
-                   invoiceDataCoreForInsert.setValue(invoice.total, forKey: "total")
-                   invoiceDataCoreForInsert.setValue(invoice.dueDate, forKey: "dueDate")
-                   invoiceDataCoreForInsert.setValue(invoice.payDate, forKey: "payDate")
+                invoiceDataCoreForInsert.setValue(invoice.invoiceNumber, forKey: "invoiceNumber")
+                invoiceDataCoreForInsert.setValue(invoice.seller, forKey: "seller")
+                invoiceDataCoreForInsert.setValue(invoice.total, forKey: "total")
+                invoiceDataCoreForInsert.setValue(invoice.dueDate, forKey: "dueDate")
+                invoiceDataCoreForInsert.setValue(invoice.payDate, forKey: "payDate")
                    
-                   for prod in invoice.products {
+                for prod in invoice.products {
                        
                        let invoiceProductDataCoreForInsert = NSManagedObject(entity: invoiceProductEntity,
                        insertInto: self.managedContext)
