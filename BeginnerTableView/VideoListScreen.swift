@@ -24,6 +24,12 @@ class VideoListScreen: UIViewController {
     var text = ""
     var database: Database = Database()
 
+    var nrOfCompanies: Int = 0
+    var nrOfProducts: Int = 0
+    var nrOfInvoices: Int = 0
+    var createNewData: Bool = false
+    
+    
     
     var companiesCoreData : [NSManagedObject] = []
     
@@ -41,6 +47,16 @@ class VideoListScreen: UIViewController {
         super.viewDidLoad()
         searchBar.showsCancelButton = true
         searchBar.delegate = self
+        
+        
+        print("Se delcaraaaaaaaa")
+        if createNewData {
+            print(nrOfCompanies)
+            print(nrOfProducts)
+            print(nrOfInvoices)
+            print(createNewData)
+        }
+        
         
         let strings = createtringNames()
 //        companies = createCompaniesArray(availableStrings: strings)
@@ -68,12 +84,11 @@ class VideoListScreen: UIViewController {
         
         var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
         unpaidInvoicesDto.sort(by: sorterAfterDueDate)
-        // print(unpaidInvoicesDto.count)
+
         
         var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
         paidInvoicesDto.sort(by: sorterAfterPaidDate)
-        // print(paidInvoicesDto.count)
-        
+     
         invoicesDto = []
         invoicesDto += unpaidInvoicesDto
         invoicesDto += paidInvoicesDto
@@ -82,12 +97,10 @@ class VideoListScreen: UIViewController {
         for index in 0..<invoicesDto.count{
             let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
             if nrOfElements > 1 {
-                // print(invoicesDto[index])
                 invoicesDto[index].duplicationFlag = true
             }
         }
         searchInvoices = invoicesDto
-        
     }
 }
 

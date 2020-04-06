@@ -64,7 +64,7 @@ func generatePhoneNumber() -> String {
 }
   
 
-func createCompaniesArray( availableStrings: [String] ) -> [Company] {
+func createCompaniesArray( availableStrings: [String]) -> [Company] {
     
   var companies: [Company] = []
    
