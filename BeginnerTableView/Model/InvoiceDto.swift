@@ -19,6 +19,9 @@ struct InvoiceDto: Equatable {
 
 func ==(lhs: InvoiceDto, rhs: InvoiceDto) -> Bool {
     
+    if lhs.seller != rhs.seller {
+        return false
+    }
     
     for prod in lhs.products {
         if !rhs.products.contains(prod){

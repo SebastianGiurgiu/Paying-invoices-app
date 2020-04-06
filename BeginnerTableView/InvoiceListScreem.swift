@@ -1,10 +1,11 @@
 //
-//  VideoListScreen.swift
+//  InvoiceListScreem.swift
 //  BeginnerTableView
 //
-//  Created by Sean Allen on 5/19/17.
-//  Copyright © 2017 Sean Allen. All rights reserved.
+//  Created by Sebastian Giurgiu on 06/04/2020.
+//  Copyright © 2020 Sean Allen. All rights reserved.
 //
+
 
 import UIKit
 import SQLite3
@@ -12,8 +13,8 @@ import CoreData
 
 class InvoiceListScreen: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     var companies: [Company] = []
     var products: [Product] = []
@@ -21,7 +22,7 @@ class InvoiceListScreen: UIViewController {
     var invoicesDto: [InvoiceDto] = []
     var searchInvoices: [InvoiceDto] = []
     var searching = false
-    var text = ""
+    var seacrhingText = ""
     var database: Database = Database()
 
     var nrOfCompanies: Int = 0
@@ -41,42 +42,45 @@ class InvoiceListScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.showsCancelButton = true
-        searchBar.delegate = self
+        self.searchBar.showsCancelButton = true
+        self.searchBar.delegate = self
         
         
         print("Se delcaraaaaaaaa")
-        if createNewData {
-            print(nrOfCompanies)
-            print(nrOfProducts)
-            print(nrOfInvoices)
+        if self.createNewData {
+            print(self.nrOfCompanies)
+            print(self.nrOfProducts)
+            print(self.nrOfInvoices)
             self.createNewDataAndSaveInCoreData(nrOfCompanies: nrOfCompanies,nrOfProducts: nrOfProducts,nrOfInvoices: nrOfInvoices)
         } else {
             self.continueWithOldDataFromCoreData()
         }
         
-        invoicesDto = createInvoiceDtoArray(invoices: invoices)
-        
-        var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
-        unpaidInvoicesDto.sort(by: sorterAfterDueDate)
-
-        
-        var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
-        paidInvoicesDto.sort(by: sorterAfterPaidDate)
-     
-        invoicesDto = []
-        invoicesDto += unpaidInvoicesDto
-        invoicesDto += paidInvoicesDto
-        
-    
-        for index in 0..<invoicesDto.count{
-            let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
-            if nrOfElements > 1 {
-                invoicesDto[index].duplicationFlag = true
-            }
-        }
-        searchInvoices = invoicesDto
+       setUpInvoicesDto()
+        self.searchInvoices = invoicesDto
     }
+    
+    func setUpInvoicesDto() {
+        self.invoicesDto = createInvoiceDtoArray(invoices: invoices)
+               
+               var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
+               unpaidInvoicesDto.sort(by: sorterAfterDueDate)
+
+               var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
+               paidInvoicesDto.sort(by: sorterAfterPaidDate)
+            
+               invoicesDto = []
+               invoicesDto += unpaidInvoicesDto
+               invoicesDto += paidInvoicesDto
+               
+               for index in 0..<invoicesDto.count{
+                   let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
+                   if nrOfElements > 1 {
+                       invoicesDto[index].duplicationFlag = true
+                   }
+               }
+    }
+    
     
     func createNewDataAndSaveInCoreData(nrOfCompanies: Int,nrOfProducts: Int,nrOfInvoices: Int) {
         
@@ -86,27 +90,27 @@ class InvoiceListScreen: UIViewController {
             return;
         }
         
-        database.deleteAllData(entity: "CompanyCoreData")
-        database.deleteAllData(entity: "ProductCoreData")
-        database.deleteAllData(entity: "InvoiceCoreData")
-        database.deleteAllData(entity: "InvoiceProductCoreData")
+        self.database.deleteAllData(entity: "CompanyCoreData")
+        self.database.deleteAllData(entity: "ProductCoreData")
+        self.database.deleteAllData(entity: "InvoiceCoreData")
+        self.database.deleteAllData(entity: "InvoiceProductCoreData")
         
         let strings = createtringNames()
-        companies = createCompaniesArray(availableStrings: strings, nrOfCompanies: nrOfCompanies)
-        products = createProductsArray(nrOfProducts: nrOfProducts)
-        invoices = createInvoiceArray(companies: companies, products: products, nrOfInvoices: nrOfInvoices)
+        self.companies = createCompaniesArray(availableStrings: strings, nrOfCompanies: nrOfCompanies)
+        self.products = createProductsArray(nrOfProducts: nrOfProducts)
+        self.invoices = createInvoiceArray(companies: companies, products: products, nrOfInvoices: nrOfInvoices)
         
-        database.addAllCompaniesInCoreData(companies: companies)
-        database.addAllProductInCoreData(products: products)
-        database.addAllInvoiceInCoreData(invoices: invoices)
+        self.database.addAllCompaniesInCoreData(companies: companies)
+        self.database.addAllProductInCoreData(products: products)
+        self.database.addAllInvoiceInCoreData(invoices: invoices)
         
     }
 
     func continueWithOldDataFromCoreData() {
         
-        companies = database.getCompaniesFromCoreData()
-        products = database.getProductsFromCoreData()
-        invoices = database.getInvoiceFromCoreData()
+        self.companies = database.getCompaniesFromCoreData()
+        self.products = database.getProductsFromCoreData()
+        self.invoices = database.getInvoiceFromCoreData()
         
     }
     
@@ -127,7 +131,7 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceCell") as! InvoiceCell
         let invoiceDto = searchInvoices[indexPath.row]
         if searching {
-            cell.setInvoiceDto2(invoiceDto: invoiceDto, searchText: text)
+            cell.setInvoiceDtoAfterSeachingText(invoiceDto: invoiceDto, searchText: seacrhingText)
         } else {
             cell.setInvoiceDto(invoiceDto: invoiceDto)
         }
@@ -136,13 +140,14 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let paid = paidAction(at: indexPath)
-        return UISwipeActionsConfiguration(actions: [paid])
+        let duplicate = duplicatedAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [paid,duplicate])
     }
     
     func paidAction(at indexPath: IndexPath) -> UIContextualAction {
         
         let invoiceDto = searchInvoices[indexPath.row]
-        let action = UIContextualAction(style: .normal, title: "PAID") {
+        let action = UIContextualAction(style: .normal, title: "Paid") {
             (action, view, completion ) in
                 print(invoiceDto)
             self.searchInvoices[indexPath.row].dates.append(Date())
@@ -151,31 +156,53 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
             self.tableView.reloadData()
         }
         
-        action.backgroundColor = .red
+         action.backgroundColor = .red
+        
         return action
         
     }
+    
+    
+    func duplicatedAction(at indexPath: IndexPath) -> UIContextualAction {
+          
+        let invoiceDto = searchInvoices[indexPath.row]
+          let action = UIContextualAction(style: .normal, title: "Duplicate") {
+              (action, view, completion ) in
+                  print(invoiceDto)
+              duplicateInvoice(invoices: &self.invoices, invoiceNumber: self.searchInvoices[indexPath.row].invoiceNumber)
+              self.database.addAnInvoiceInCoreData(invoices: self.invoices)
+              self.setUpInvoicesDto()
+              self.tableView.reloadData()
+          }
+          
+           action.backgroundColor = .blue
+          
+          return action
+          
+      }
+    
+    
 }
 
 
 extension InvoiceListScreen: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchBar.showsCancelButton = true
-        text = searchText
+        self.searchBar.showsCancelButton = true
+        self.seacrhingText = searchText
         if searchText.count > 2 {
-        searchInvoices = getOrderedInvoicesDtoAfterText(invoicesDto: invoicesDto,searchText: searchText)
-        searching = true
-        tableView.reloadData()
+        self.searchInvoices = getOrderedInvoicesDtoAfterText(invoicesDto: invoicesDto,searchText: searchText)
+        self.searching = true
+        self.tableView.reloadData()
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searching = false
-        searchBar.text = ""
-        searchBar.showsCancelButton = false
-        searchInvoices = invoicesDto
-        tableView.reloadData()
+        self.searching = false
+        self.searchBar.text = ""
+        self.searchBar.showsCancelButton = false
+        self.searchInvoices = invoicesDto
+        self.tableView.reloadData()
     }
     
 }

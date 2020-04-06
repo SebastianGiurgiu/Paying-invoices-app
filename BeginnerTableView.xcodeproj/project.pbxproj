@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB2CFB52243BBD4600D06E93 /* InvoiceListScreem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2CFB51243BBD4600D06E93 /* InvoiceListScreem.swift */; };
 		CB7B5CA224350C6300B027CF /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B5CA124350C6300B027CF /* Company.swift */; };
 		CB7B5CA424350D4F00B027CF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B5CA324350D4F00B027CF /* Product.swift */; };
 		CB7B5CA624350DAD00B027CF /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B5CA524350DAD00B027CF /* Invoice.swift */; };
@@ -18,11 +19,11 @@
 		ED47EDA61ECF4D0E00F5FC0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED47EDA41ECF4D0E00F5FC0E /* Main.storyboard */; };
 		ED47EDA81ECF4D0E00F5FC0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED47EDA71ECF4D0E00F5FC0E /* Assets.xcassets */; };
 		ED47EDAB1ECF4D0E00F5FC0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED47EDA91ECF4D0E00F5FC0E /* LaunchScreen.storyboard */; };
-		ED47EDB31ECF4DD400F5FC0E /* VideoListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47EDB21ECF4DD400F5FC0E /* VideoListScreen.swift */; };
-		ED47EDB51ECF51B000F5FC0E /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47EDB41ECF51B000F5FC0E /* VideoCell.swift */; };
+		ED47EDB51ECF51B000F5FC0E /* InvoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47EDB41ECF51B000F5FC0E /* InvoiceCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB2CFB51243BBD4600D06E93 /* InvoiceListScreem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListScreem.swift; sourceTree = "<group>"; };
 		CB7B5CA124350C6300B027CF /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		CB7B5CA324350D4F00B027CF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		CB7B5CA524350DAD00B027CF /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
@@ -36,8 +37,7 @@
 		ED47EDA71ECF4D0E00F5FC0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED47EDAA1ECF4D0E00F5FC0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED47EDAC1ECF4D0E00F5FC0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED47EDB21ECF4DD400F5FC0E /* VideoListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListScreen.swift; sourceTree = "<group>"; };
-		ED47EDB41ECF51B000F5FC0E /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		ED47EDB41ECF51B000F5FC0E /* InvoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				ED47EDA01ECF4D0E00F5FC0E /* AppDelegate.swift */,
-				ED47EDB21ECF4DD400F5FC0E /* VideoListScreen.swift */,
-				ED47EDB41ECF51B000F5FC0E /* VideoCell.swift */,
+				ED47EDB41ECF51B000F5FC0E /* InvoiceCell.swift */,
 				ED47EDA41ECF4D0E00F5FC0E /* Main.storyboard */,
 				ED47EDA71ECF4D0E00F5FC0E /* Assets.xcassets */,
 				ED47EDA91ECF4D0E00F5FC0E /* LaunchScreen.storyboard */,
@@ -92,6 +91,7 @@
 				CB9B77982438CA0B0002111D /* Data.xcdatamodeld */,
 				CB9B779C2438EB9C0002111D /* Database.swift */,
 				CBEA927E243A2E3A00AA92F8 /* MainMenuViewController.swift */,
+				CB2CFB51243BBD4600D06E93 /* InvoiceListScreem.swift */,
 			);
 			path = BeginnerTableView;
 			sourceTree = "<group>";
@@ -171,11 +171,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED47EDA11ECF4D0E00F5FC0E /* AppDelegate.swift in Sources */,
-				ED47EDB31ECF4DD400F5FC0E /* VideoListScreen.swift in Sources */,
 				CB7B5CA624350DAD00B027CF /* Invoice.swift in Sources */,
+				CB2CFB52243BBD4600D06E93 /* InvoiceListScreem.swift in Sources */,
 				CB9B779A2438CA0B0002111D /* Data.xcdatamodeld in Sources */,
 				CB7B5CA224350C6300B027CF /* Company.swift in Sources */,
-				ED47EDB51ECF51B000F5FC0E /* VideoCell.swift in Sources */,
+				ED47EDB51ECF51B000F5FC0E /* InvoiceCell.swift in Sources */,
 				CBEA927F243A2E3A00AA92F8 /* MainMenuViewController.swift in Sources */,
 				CB9B779D2438EB9C0002111D /* Database.swift in Sources */,
 				CB7B5CA424350D4F00B027CF /* Product.swift in Sources */,

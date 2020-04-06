@@ -38,7 +38,6 @@ class Database {
        
         do {
             try self.managedContext.save()
-         // companiesCoreData.append(company)
         } catch let error as NSError {
           print("Could not save. \(error), \(error.userInfo)")
         }
@@ -138,6 +137,48 @@ class Database {
            }
     }
     
+    func addAnInvoiceInCoreData(invoices: [Invoice]) {
+              
+              let invoiceEntity =
+                NSEntityDescription.entity(forEntityName: "InvoiceCoreData",
+                                           in: self.managedContext)!
+           
+               let invoiceProductEntity =
+                    NSEntityDescription.entity(forEntityName: "InvoiceProductCoreData",
+                                               in: self.managedContext)!
+               
+        let invoice = invoices[invoices.count - 1]
+            
+                  let invoiceDataCoreForInsert = NSManagedObject(entity: invoiceEntity,
+                                                                 insertInto: self.managedContext)
+               
+                   invoiceDataCoreForInsert.setValue(invoice.invoiceNumber, forKey: "invoiceNumber")
+                   invoiceDataCoreForInsert.setValue(invoice.seller, forKey: "seller")
+                   invoiceDataCoreForInsert.setValue(invoice.total, forKey: "total")
+                   invoiceDataCoreForInsert.setValue(invoice.dueDate, forKey: "dueDate")
+                   invoiceDataCoreForInsert.setValue(invoice.payDate, forKey: "payDate")
+                   
+                   for prod in invoice.products {
+                       
+                       let invoiceProductDataCoreForInsert = NSManagedObject(entity: invoiceProductEntity,
+                       insertInto: self.managedContext)
+                       
+                       invoiceProductDataCoreForInsert.setValue(invoice.invoiceNumber, forKey: "invoiceNumber")
+                       invoiceProductDataCoreForInsert.setValue(prod.productNumber, forKey: "productNumber")
+                   }
+                   
+               
+               
+              
+             
+              do {
+                  try self.managedContext.save()
+              } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+              }
+       }
+    
+    
     
     
     
@@ -149,7 +190,6 @@ class Database {
             let results = try self.managedContext.fetch(fetchRequest)
             for object in results {
                 guard let objectData = object as? NSManagedObject else {continue}
-               // print("sterg chestii")
                 self.managedContext.delete(objectData)
             }
         } catch let error {
@@ -163,30 +203,7 @@ class Database {
             }
     }
     
-    func showAllCompanies() {
-        
-        var companiesCoreData : [NSManagedObject] = []
-        
-        let fetchRequest =
-          NSFetchRequest<NSManagedObject>(entityName: "CompanyCoreData")
-        
-        do {
-            companiesCoreData = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        print("======================")
-        for result in companiesCoreData {
-            let name = result.value(forKey: "name") as? String
-            let phoneNumber = result.value(forKey: "phoneNumber") as? String
-            print("Name: \(name!) ; Phone Number: \(phoneNumber!)")
-        }
-        
-        print("======================")
-    }
-    
-    
+   
     func getCompaniesFromCoreData() -> [Company] {
         var companies : [Company] = []
         var companiesCoreData : [NSManagedObject] = []
@@ -240,8 +257,6 @@ class Database {
         var productsCoreData : [NSManagedObject] = []
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ProductCoreData")
         var p = Product(productNumber: Int(productNumber), name: "", price: 0)
-//        let predicate = NSPredicate(format: "productNumber = %@", productNumber)
-//        fetchRequest.predicate = predicate
                
         do {
             productsCoreData = try managedContext.fetch(fetchRequest)
@@ -269,10 +284,7 @@ class Database {
         
         var products : [Product] = []
         var invoicesProductCoreData : [NSManagedObject] = []
-               
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "InvoiceProductCoreData")
-        // let predicate = NSPredicate(format: "invoiceNumber == %@", invoiceNumber)
-        // fetchRequest.predicate = predicate
         
         do {
             invoicesProductCoreData = try managedContext.fetch(fetchRequest)
@@ -329,102 +341,7 @@ class Database {
     }
     
     
-    
-    
-    
-    
-    func showAllProducts() {
-        
-        var productsCoreData : [NSManagedObject] = []
-        
-        let fetchRequest =
-          NSFetchRequest<NSManagedObject>(entityName: "ProductCoreData")
-        
-        do {
-            productsCoreData = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        print("======================")
-        for result in productsCoreData {
-            let name = result.value(forKey: "name") as? String
-            let price = result.value(forKey: "price") as? Double
-            let productNumber = result.value(forKey: "productNumber") as? Int16
-            print("Product Number: \(productNumber!) ; Name: \(name!); price : \(price!)")
-        }
-        
-        print("======================")
-    }
-    
-    
-    func showAllInvoices() {
-           
-           var invoicesCoreData : [NSManagedObject] = []
-           
-           let fetchRequest =
-             NSFetchRequest<NSManagedObject>(entityName: "InvoiceCoreData")
-           
-           do {
-               invoicesCoreData = try managedContext.fetch(fetchRequest)
-           } catch let error as NSError {
-             print("Could not fetch. \(error), \(error.userInfo)")
-           }
-           
-           print("======================")
-           for result in invoicesCoreData {
-            let invoiceNumber = result.value(forKey: "invoiceNumber") as? Int16
-            let seller = result.value(forKey: "seller") as? String
-            let total = result.value(forKey: "total") as? Double
-            let dueDate = result.value(forKey: "dueDate") as? Date
-            let payDate = result.value(forKey: "payDate") as? Date
-            
-            print("Invoice Number: \(invoiceNumber!) ; Seller: \(seller!); total : \(total!) ; dueDate: \(dueDate!) " )
-            
-            if payDate != nil {
-                print("payDate  \(payDate!)")
-            }
-           }
-           
-           print("======================")
-       }
-       
-    func showAllInvoicesProductBinds() {
-        
-        var invoicesProductCoreData : [NSManagedObject] = []
-        
-        let fetchRequest =
-          NSFetchRequest<NSManagedObject>(entityName: "InvoiceProductCoreData")
-        
-        do {
-            invoicesProductCoreData = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        print("======================")
-        for result in invoicesProductCoreData {
-         let invoiceNumber = result.value(forKey: "invoiceNumber") as? Int16
-         let productNumber = result.value(forKey: "productNumber") as? Int16
-         
-         print("Invoice Number: \(invoiceNumber!) ; Product Number: \(productNumber!)" )
-         
-        }
-        
-        print("======================")
-    }
 }
 
-func getManagedContext() -> NSManagedObjectContext {
- 
-    let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate
-    
-    let managedContext =
-        appDelegate?.persistentContainer.viewContext
-    
-    return managedContext!
-    
-}
 
 

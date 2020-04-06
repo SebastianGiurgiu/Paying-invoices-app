@@ -20,16 +20,15 @@ class MainMenuViewController: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func usingOldData(_ sender: Any) {
-        print("old data")
         createNewData = false
-        performSegue(withIdentifier: "segueNewData", sender: self)
+        performSegue(withIdentifier: "segueData", sender: self)
     }
     
     
     
     @IBAction func usingNewData(_ sender: Any) {
         createNewData = true
-        performSegue(withIdentifier: "segueNewData", sender: self)
+        performSegue(withIdentifier: "segueData", sender: self)
     }
     
     override func viewDidLoad() {
@@ -41,7 +40,7 @@ class MainMenuViewController: UIViewController,UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if createNewData {
-            let receveiceVC = segue.destination as! VideoListScreen
+            let receveiceVC = segue.destination as! InvoiceListScreen
             receveiceVC.createNewData = true
             receveiceVC.nrOfCompanies = Int(numberOfCompanies.text!)!
             receveiceVC.nrOfProducts = Int(numberOfProducts.text!)!
@@ -49,7 +48,6 @@ class MainMenuViewController: UIViewController,UITextFieldDelegate {
         }
         
     }
-    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {

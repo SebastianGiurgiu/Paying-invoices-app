@@ -8,21 +8,22 @@
 
 import UIKit
 
-class VideoCell: UITableViewCell {
+class InvoiceCell: UITableViewCell {
 
-    @IBOutlet weak var prod1Name: UILabel!
-    @IBOutlet weak var prod2Name: UILabel!
-    @IBOutlet weak var prod3Name: UILabel!
-    @IBOutlet weak var total: UILabel!
-    
+
     @IBOutlet weak var sellerName: UILabel!
+    
     @IBOutlet weak var dueDate: UILabel!
     @IBOutlet weak var paidDate: UILabel!
-    @IBOutlet weak var duplicat: UILabel!
-
+    @IBOutlet weak var prod1Name: UILabel!
+    
+    @IBOutlet weak var total: UILabel!
+    @IBOutlet weak var prod3Name: UILabel!
+    @IBOutlet weak var prod2Name: UILabel!
     
     func setInvoiceDto(invoiceDto: InvoiceDto) {
         sellerName.text = invoiceDto.seller
+        sellerName.textAlignment = .center
         
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
@@ -32,20 +33,24 @@ class VideoCell: UITableViewCell {
         
         if invoiceDto.dates.count > 1 {
             let paidDateString = df.string(from: invoiceDto.dates[1])
-            paidDate.text = paidDateString
+            paidDate.text = "Paid on \(paidDateString)"
+             paidDate.font = UIFont.boldSystemFont(ofSize: 16.0)
+        } else {
+                let diff = daysBetween(start: Date(), end: invoiceDto.dates[0])
+                paidDate.text = "There are \(diff) days left"
         }
         
         if(invoiceDto.products.count == 1 ){
            prod1Name.text = invoiceDto.products[0]
-           prod2Name.text = "p2"
-           prod3Name.text = "p3"
+           prod2Name.text = ""
+           prod3Name.text = ""
         }
         
         
         if(invoiceDto.products.count == 2 ){
             prod1Name.text = invoiceDto.products[0]
             prod2Name.text = invoiceDto.products[1]
-            prod3Name.text = "p3"
+            prod3Name.text = ""
         }
         
         
@@ -55,18 +60,25 @@ class VideoCell: UITableViewCell {
             prod3Name.text = invoiceDto.products[2]
         }
         
-        total.text = String(invoiceDto.total)
+        prod1Name.textColor = UIColor.black
+        prod2Name.textColor = UIColor.black
+        prod3Name.textColor = UIColor.black
+        sellerName.textColor = UIColor.black
+        
+        let myDouble = invoiceDto.total
+        let doubleStr = String(format: "%.2f", myDouble)
+        total.text = String(doubleStr)
         
         if invoiceDto.duplicationFlag == true {
-            duplicat.text = "duplicatttt"
+            self.backgroundColor = UIColor.yellow
         } else {
-             duplicat.text = ""
+            self.backgroundColor = UIColor.white
         }
         
        }
     
 
-    func setInvoiceDto2(invoiceDto: InvoiceDto, searchText: String) {
+    func setInvoiceDtoAfterSeachingText(invoiceDto: InvoiceDto, searchText: String) {
             sellerName.text = invoiceDto.seller
             
             colorLabel(label: sellerName,searchText: searchText)
@@ -77,16 +89,20 @@ class VideoCell: UITableViewCell {
             let dueDateString = df.string(from: invoiceDto.dates[0])
             dueDate.text = dueDateString
             
-            if invoiceDto.dates.count > 1 {
-                let paidDateString = df.string(from: invoiceDto.dates[1])
-                paidDate.text = paidDateString
-            }
+             if invoiceDto.dates.count > 1 {
+                       let paidDateString = df.string(from: invoiceDto.dates[1])
+                       paidDate.text = "Paid on \(paidDateString)"
+                        paidDate.font = UIFont.boldSystemFont(ofSize: 16.0)
+                   } else {
+                           let diff = daysBetween(start: Date(), end: invoiceDto.dates[0])
+                           paidDate.text = "There are \(diff) days left"
+                   }
             
             if(invoiceDto.products.count == 1 ){
                prod1Name.text = invoiceDto.products[0]
                colorLabel(label: prod1Name,searchText: searchText)
-               prod2Name.text = "p2"
-               prod3Name.text = "p3"
+               prod2Name.text = ""
+               prod3Name.text = ""
             }
             
             
@@ -95,7 +111,7 @@ class VideoCell: UITableViewCell {
                 colorLabel(label: prod1Name,searchText: searchText)
                 prod2Name.text = invoiceDto.products[1]
                 colorLabel(label: prod2Name,searchText: searchText)
-                prod3Name.text = "p3"
+                prod3Name.text = ""
             }
             
             
@@ -111,10 +127,10 @@ class VideoCell: UITableViewCell {
             total.text = String(invoiceDto.total)
             
             if invoiceDto.duplicationFlag == true {
-                duplicat.text = "duplicatttt"
-            } else {
-                 duplicat.text = ""
-            }
+                self.backgroundColor = UIColor.yellow
+            }  else {
+                self.backgroundColor = UIColor.white
+                }
             
            }
         
@@ -129,4 +145,8 @@ func colorLabel(label: UILabel, searchText: String) {
     attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
     label.attributedText = attribute
     
+}
+
+func daysBetween(start: Date, end: Date) -> Int {
+    return Calendar.current.dateComponents([.day], from: start, to: end).day!
 }

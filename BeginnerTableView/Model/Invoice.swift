@@ -77,10 +77,6 @@ func createInvoiceArray(companies: [Company], products: [Product], nrOfInvoices:
     
     let nrOfOther = nrOfInvoices - companies.count
     
-    // FIX ME
-    
-   
-    
     for _ in 1...nrOfOther {
         let x = Int.random(in: 0..<companies.count)
         var invoice = generateNewInvoice(company: companies[x], products: products)
@@ -93,6 +89,7 @@ func createInvoiceArray(companies: [Company], products: [Product], nrOfInvoices:
   return invoices
 }
 
+
 func paidInvoice(invoices: inout [Invoice], invoiceNumber: Int) {
     
     for index in 0..<invoices.count{
@@ -100,6 +97,23 @@ func paidInvoice(invoices: inout [Invoice], invoiceNumber: Int) {
             invoices[index].payDate = Date()
         }
     }
+    
+}
+
+
+func duplicateInvoice(invoices: inout [Invoice], invoiceNumber: Int) {
+    
+    let newInvoiceNumber = invoices[invoices.count - 1].invoiceNumber + 1
+    
+    for index in 1...invoices.count{
+        if invoices[index].invoiceNumber == invoiceNumber {
+            var newInvoice = invoices[index]
+            newInvoice.invoiceNumber = newInvoiceNumber
+            invoices.append(newInvoice)
+        }
+    }
+    
+
     
 }
 
