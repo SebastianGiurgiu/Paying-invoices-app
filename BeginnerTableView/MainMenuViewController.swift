@@ -40,11 +40,11 @@ class MainMenuViewController: UIViewController,UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if createNewData {
-            let receveiceVC = segue.destination as! InvoiceListScreen
-            receveiceVC.createNewData = true
-            receveiceVC.nrOfCompanies = Int(numberOfCompanies.text!)!
-            receveiceVC.nrOfProducts = Int(numberOfProducts.text!)!
-            receveiceVC.nrOfInvoices = Int(numberOfInvoices.text!)!
+            let invoiceListScreen = segue.destination as! InvoiceListScreen
+            invoiceListScreen.createNewData = true
+            invoiceListScreen.nrOfCompanies = Int(numberOfCompanies.text!)!
+            invoiceListScreen.nrOfProducts = Int(numberOfProducts.text!)!
+            invoiceListScreen.nrOfInvoices = Int(numberOfInvoices.text!)!
         }
         
     }

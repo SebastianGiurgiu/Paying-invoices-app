@@ -30,27 +30,13 @@ class InvoiceListScreen: UIViewController {
     var nrOfInvoices: Int = 0
     var createNewData: Bool = false
     
-    
-    func sorterAfterDueDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
-        return this.dates[0] < that.dates[0]
-    }
-    
-    func sorterAfterPaidDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
-        return this.dates[1] < that.dates[1]
-    }
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchBar.showsCancelButton = true
         self.searchBar.delegate = self
         
-        
-        print("Se delcaraaaaaaaa")
         if self.createNewData {
-            print(self.nrOfCompanies)
-            print(self.nrOfProducts)
-            print(self.nrOfInvoices)
             self.createNewDataAndSaveInCoreData(nrOfCompanies: nrOfCompanies,nrOfProducts: nrOfProducts,nrOfInvoices: nrOfInvoices)
         } else {
             self.continueWithOldDataFromCoreData()
@@ -60,6 +46,7 @@ class InvoiceListScreen: UIViewController {
         self.searchInvoices = invoicesDto
     }
     
+    // Pending invoices should appear first, ordered by due date, pending invoices are followed by the paid invoices, ordered by paid date
     func setUpInvoicesDto() {
         self.invoicesDto = createInvoiceDtoArray(invoices: invoices)
                
@@ -113,9 +100,6 @@ class InvoiceListScreen: UIViewController {
         self.invoices = database.getInvoiceFromCoreData()
         
     }
-    
-    
-    
 }
 
 
@@ -178,10 +162,7 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
            action.backgroundColor = .blue
           
           return action
-          
       }
-    
-    
 }
 
 
@@ -207,7 +188,7 @@ extension InvoiceListScreen: UISearchBarDelegate {
     
 }
 
-
+// List of results should contain 10 items or less.
 func getOrderedInvoicesDtoAfterText(invoicesDto: [InvoiceDto],searchText: String) -> [InvoiceDto] {
     
   var filteredInvoicesDto: [InvoiceDto] = []

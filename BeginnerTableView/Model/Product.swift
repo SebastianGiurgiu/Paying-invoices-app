@@ -19,13 +19,13 @@ func ==(lhs: Product, rhs: Product) -> Bool {
     return lhs.name == rhs.name
 }
 
-
+// Create new random product name
 func generateProductName() -> String {
   let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
   return String((0..<5).map{ _ in letters.randomElement()! })
 }
 
-
+// Generate new product
 func generateNewProduct() -> Product {
 
     var p = Product(productNumber: 0, name: "", price: 0)
@@ -40,6 +40,7 @@ func generateNewProduct() -> Product {
     return p
 }
 
+// Create an array with products
 func createProductsArray(nrOfProducts: Int) -> [Product] {
     
   var products: [Product] = []

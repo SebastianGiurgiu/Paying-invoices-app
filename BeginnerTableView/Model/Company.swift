@@ -18,7 +18,7 @@ func ==(lhs: Company, rhs: Company) -> Bool {
     return lhs.name == rhs.name
    }
 
-
+// Define a set of 8 strings that will be used later to represent first names of the companies.
 func createtringNames() -> [String] {
       
       return ["Romanian","International","European","Food"
@@ -27,7 +27,7 @@ func createtringNames() -> [String] {
   }
 
 
-
+// Generate a new company
 func generateNewCompany(numberOfWords: Int, availableStrings: [String]) -> Company {
       
       var c = Company(name: "", phoneNumber: "")
@@ -51,6 +51,7 @@ func generateNewCompany(numberOfWords: Int, availableStrings: [String]) -> Compa
       return c
   }
 
+// Generate a new phone number
 func generatePhoneNumber() -> String {
     
     var phoneNumber = ""
@@ -63,27 +64,28 @@ func generatePhoneNumber() -> String {
     return phoneNumber
 }
   
-
+// Create an array with companies
 func createCompaniesArray( availableStrings: [String], nrOfCompanies : Int) -> [Company] {
     
   var companies: [Company] = []
-   
-    var nrOfCompaniesAtLeast3Words = 1
-    while nrOfCompaniesAtLeast3Words <= 3 {
+    
+   // create 3 companies with 3 strings in their name
+    var nrOfC = 1
+    while nrOfC <= 3 {
         let c = generateNewCompany(numberOfWords: 3, availableStrings: availableStrings)
         if !companies.contains(c) {
             companies.append(c)
-            nrOfCompaniesAtLeast3Words += 1
+            nrOfC += 1
         }
     }
     
-    var nrOfOtherCompanies = 1
-    while nrOfOtherCompanies <= nrOfCompanies {
-        let numberOfWords = Int.random(in: 2..<4)
+    // create companies with 2 or 3 strings in their name
+    while nrOfC <= nrOfCompanies {
+        let numberOfWords = Int.random(in: 2...3)
         let c = generateNewCompany(numberOfWords: numberOfWords, availableStrings: availableStrings)
         if !companies.contains(c) {
                 companies.append(c)
-                nrOfOtherCompanies += 1
+                nrOfC += 1
             }
         }
   return companies

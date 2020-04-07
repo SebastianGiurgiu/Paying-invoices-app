@@ -20,7 +20,7 @@ struct Invoice{
 }
 
 
-
+// Generate an invoice
 func generateNewInvoice(company: Company, products: [Product]) -> Invoice{
     
     var invoice = Invoice(invoiceNumber: 0, seller: "", products: [], total: 0, dueDate: Date())
@@ -62,7 +62,7 @@ func generateNewInvoice(company: Company, products: [Product]) -> Invoice{
     return invoice
 }
 
-
+// Create an array with invoices
 func createInvoiceArray(companies: [Company], products: [Product], nrOfInvoices: Int) -> [Invoice] {
     
   var invoices: [Invoice] = []

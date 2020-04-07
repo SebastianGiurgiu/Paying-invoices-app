@@ -17,6 +17,7 @@ struct InvoiceDto: Equatable {
     var duplicationFlag: Bool
 }
 
+// Create for check duplication
 func ==(lhs: InvoiceDto, rhs: InvoiceDto) -> Bool {
     
     if lhs.seller != rhs.seller {
@@ -70,3 +71,12 @@ func createInvoiceDtoArray(invoices: [Invoice] ) -> [InvoiceDto] {
     
   return invoicesDto
 }
+
+func sorterAfterDueDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
+    return this.dates[0] < that.dates[0]
+}
+   
+func sorterAfterPaidDate(this:InvoiceDto, that:InvoiceDto) -> Bool {
+    return this.dates[1] > that.dates[1]
+}
+   
