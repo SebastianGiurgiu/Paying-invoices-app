@@ -49,23 +49,22 @@ class InvoiceListScreen: UIViewController {
     // Pending invoices should appear first, ordered by due date, pending invoices are followed by the paid invoices, ordered by paid date
     func setUpInvoicesDto() {
         self.invoicesDto = createInvoiceDtoArray(invoices: invoices)
-               
-               var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
-               unpaidInvoicesDto.sort(by: sorterAfterDueDate)
+        var unpaidInvoicesDto =  invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 1 })
+        unpaidInvoicesDto.sort(by: sorterAfterDueDate)
 
-               var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
-               paidInvoicesDto.sort(by: sorterAfterPaidDate)
+         var paidInvoicesDto = invoicesDto.filter({ (invoiceDto) in invoiceDto.dates.count == 2 })
+         paidInvoicesDto.sort(by: sorterAfterPaidDate)
             
-               invoicesDto = []
-               invoicesDto += unpaidInvoicesDto
-               invoicesDto += paidInvoicesDto
+         invoicesDto = []
+         invoicesDto += unpaidInvoicesDto
+         invoicesDto += paidInvoicesDto
                
-               for index in 0..<invoicesDto.count{
-                   let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
-                   if nrOfElements > 1 {
-                       invoicesDto[index].duplicationFlag = true
-                   }
-               }
+         for index in 0..<invoicesDto.count{
+            let nrOfElements =  invoicesDto.filter{$0 == invoicesDto[index] }.count
+            if nrOfElements > 1 {
+                invoicesDto[index].duplicationFlag = true
+            }
+        }
     }
     
     
@@ -163,6 +162,7 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
           
           return action
       }
+  
 }
 
 

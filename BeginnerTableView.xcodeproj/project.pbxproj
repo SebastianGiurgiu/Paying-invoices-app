@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB2CFB52243BBD4600D06E93 /* InvoiceListScreem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2CFB51243BBD4600D06E93 /* InvoiceListScreem.swift */; };
+		CB2CFB52243BBD4600D06E93 /* InvoiceListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2CFB51243BBD4600D06E93 /* InvoiceListScreen.swift */; };
 		CB7B5CA224350C6300B027CF /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B5CA124350C6300B027CF /* Company.swift */; };
 		CB7B5CA424350D4F00B027CF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B5CA324350D4F00B027CF /* Product.swift */; };
 		CB7B5CA624350DAD00B027CF /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B5CA524350DAD00B027CF /* Invoice.swift */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CB2CFB51243BBD4600D06E93 /* InvoiceListScreem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListScreem.swift; sourceTree = "<group>"; };
+		CB2CFB51243BBD4600D06E93 /* InvoiceListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListScreen.swift; sourceTree = "<group>"; };
 		CB7B5CA124350C6300B027CF /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		CB7B5CA324350D4F00B027CF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		CB7B5CA524350DAD00B027CF /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 				CB9B77982438CA0B0002111D /* Data.xcdatamodeld */,
 				CB9B779C2438EB9C0002111D /* Database.swift */,
 				CBEA927E243A2E3A00AA92F8 /* MainMenuViewController.swift */,
-				CB2CFB51243BBD4600D06E93 /* InvoiceListScreem.swift */,
+				CB2CFB51243BBD4600D06E93 /* InvoiceListScreen.swift */,
 			);
 			path = BeginnerTableView;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			files = (
 				ED47EDA11ECF4D0E00F5FC0E /* AppDelegate.swift in Sources */,
 				CB7B5CA624350DAD00B027CF /* Invoice.swift in Sources */,
-				CB2CFB52243BBD4600D06E93 /* InvoiceListScreem.swift in Sources */,
+				CB2CFB52243BBD4600D06E93 /* InvoiceListScreen.swift in Sources */,
 				CB9B779A2438CA0B0002111D /* Data.xcdatamodeld in Sources */,
 				CB7B5CA224350C6300B027CF /* Company.swift in Sources */,
 				ED47EDB51ECF51B000F5FC0E /* InvoiceCell.swift in Sources */,
