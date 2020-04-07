@@ -136,6 +136,9 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
             self.searchInvoices[indexPath.row].dates.append(Date())
             paidInvoice(invoices: &self.invoices, invoiceNumber: self.searchInvoices[indexPath.row].invoiceNumber)
             self.database.paidInvoiceCoreData(invoiceNumber: self.searchInvoices[indexPath.row].invoiceNumber)
+            self.setUpInvoicesDto()
+            self.searchInvoices = self.invoicesDto
+            self.searchBarCancelButtonClicked(self.searchBar)
             self.tableView.reloadData()
         }
         
@@ -155,14 +158,15 @@ extension InvoiceListScreen: UITableViewDataSource, UITableViewDelegate {
               duplicateInvoice(invoices: &self.invoices, invoiceNumber: self.searchInvoices[indexPath.row].invoiceNumber)
               self.database.addAnInvoiceInCoreData(invoices: self.invoices)
               self.setUpInvoicesDto()
-              self.tableView.reloadData()
+            self.searchInvoices = self.invoicesDto
+            self.searchBarCancelButtonClicked(self.searchBar)
+            self.tableView.reloadData()
           }
           
            action.backgroundColor = .blue
           
           return action
       }
-  
 }
 
 

@@ -62,6 +62,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CBFC2251243C62D400349DCD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				ED47EDB41ECF51B000F5FC0E /* InvoiceCell.swift */,
+				CB2CFB51243BBD4600D06E93 /* InvoiceListScreen.swift */,
+				CBEA927E243A2E3A00AA92F8 /* MainMenuViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		ED47ED941ECF4D0E00F5FC0E = {
 			isa = PBXGroup;
 			children = (
@@ -81,8 +91,8 @@
 		ED47ED9F1ECF4D0E00F5FC0E /* BeginnerTableView */ = {
 			isa = PBXGroup;
 			children = (
+				CBFC2251243C62D400349DCD /* ViewController */,
 				ED47EDA01ECF4D0E00F5FC0E /* AppDelegate.swift */,
-				ED47EDB41ECF51B000F5FC0E /* InvoiceCell.swift */,
 				ED47EDA41ECF4D0E00F5FC0E /* Main.storyboard */,
 				ED47EDA71ECF4D0E00F5FC0E /* Assets.xcassets */,
 				ED47EDA91ECF4D0E00F5FC0E /* LaunchScreen.storyboard */,
@@ -90,8 +100,6 @@
 				CB9B779B2438EAEB0002111D /* Model */,
 				CB9B77982438CA0B0002111D /* Data.xcdatamodeld */,
 				CB9B779C2438EB9C0002111D /* Database.swift */,
-				CBEA927E243A2E3A00AA92F8 /* MainMenuViewController.swift */,
-				CB2CFB51243BBD4600D06E93 /* InvoiceListScreen.swift */,
 			);
 			path = BeginnerTableView;
 			sourceTree = "<group>";

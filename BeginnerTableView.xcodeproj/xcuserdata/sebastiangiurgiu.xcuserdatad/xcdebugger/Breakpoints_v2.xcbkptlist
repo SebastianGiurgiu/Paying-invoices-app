@@ -128,7 +128,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "232"
             endingLineNumber = "232"
-            landmarkName = "getProductsFromCoreData()"
+            landmarkName = "getProductFromCoreDataAfterProductNumber(productNumber:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,7 +144,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "231"
             endingLineNumber = "231"
-            landmarkName = "getProductsFromCoreData()"
+            landmarkName = "getProductFromCoreDataAfterProductNumber(productNumber:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

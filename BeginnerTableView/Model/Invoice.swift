@@ -105,7 +105,7 @@ func duplicateInvoice(invoices: inout [Invoice], invoiceNumber: Int) {
     
     let newInvoiceNumber = invoices[invoices.count - 1].invoiceNumber + 1
     
-    for index in 1...invoices.count{
+    for index in 1..<invoices.count{
         if invoices[index].invoiceNumber == invoiceNumber {
             var newInvoice = invoices[index]
             newInvoice.invoiceNumber = newInvoiceNumber
